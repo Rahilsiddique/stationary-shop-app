@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Add from "./components/Add";
+import Delete from "./components/Delete";
+import Display from "./components/Display";
+import { SharedState } from "./components/context/SharedState";
+import { useState } from "react";
 
 function App() {
+  const [shopData, setShopData] = useState([
+    { itemName: "pencil", itemQuantity: 25 },
+    { itemName: "sharpner", itemQuantity: 12 },
+    { itemName: "eraser", itemQuantity: 18 }
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SharedState.Provider value={{ shopData, setShopData }}>
+      <div className="main-app-box">
+        <Add />
+        <Delete />
+        <Display />
+      </div>
+    </SharedState.Provider>
   );
 }
 
